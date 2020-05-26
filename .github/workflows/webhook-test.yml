@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: I like to fail
-        run: exit 1
+        # run: exit 1
+        run: echo "But not this time!"
 
   Job2:
     runs-on: ubuntu-latest
