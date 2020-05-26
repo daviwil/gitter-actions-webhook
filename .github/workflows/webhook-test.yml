@@ -26,7 +26,7 @@ jobs:
   ReportResult:
     runs-on: ubuntu-latest
     needs: [Job1, Job2]
-    if: ${{ true }}
+    if: ${{ success() || failure() }}
 
     steps:
     - name: Report Success to Gitter
