@@ -30,9 +30,9 @@ jobs:
 
     steps:
     - name: Report Success to Gitter
-      run: curl --data-urlencode "message=GitHub Actions CI run [${{ github.run_id }}](https://github.com/daviwil/gitter-actions-webhook/actions/runs/${{ github.run_id }}) passed" ${{ secrets.GITTER_URL }}
+      run: curl --data-urlencode "message=GitHub Actions CI run [$GITHUB_RUN_ID](https://github.com/$GITHUB_REPOSITORY/actions/runs/${{ github.run_id }}) passed" ${{ secrets.GITTER_URL }}
       if: ${{ success() }}
 
     - name: Report Failure to Gitter
-      run: curl --data-urlencode "message=GitHub Actions CI run [${{ github.run_id }}](https://github.com/daviwil/gitter-actions-webhook/actions/runs/${{ github.run_id }}) failed" -d level=error ${{ secrets.GITTER_URL }}
+      run: curl --data-urlencode "message=GitHub Actions CI run [$GITHUB_RUN_ID](https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID) failed" -d level=error ${{ secrets.GITTER_URL }}
       if: ${{ failure() }}
