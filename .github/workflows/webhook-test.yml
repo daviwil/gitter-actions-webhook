@@ -37,7 +37,7 @@ jobs:
         run: exit 1
         # run: echo "But not this time!"
       - name: Report Failure to Gitter
-        run: curl --data-urlencode "message=${{ job.name }} build of run [$GITHUB_RUN_ID](https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID) failed" -d level=error ${{ secrets.GITTER_URL }}
+        run: curl --data-urlencode "message=${{ github.job }} build of run [$GITHUB_RUN_ID](https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID) failed" -d level=error ${{ secrets.GITTER_URL }}
         if: ${{ failure() }}
 
   Job2:
