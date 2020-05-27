@@ -33,7 +33,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: I like to fail
-        run: exit 1
+        run: |
+          echo "I'm gonna fail!"
+          exit 1
       - name: Report Failure to Gitter
         run: curl --data-urlencode "message=${{ github.job }} build of CI run [$GITHUB_RUN_ID](https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID) failed" -d level=error ${{ secrets.GITTER_URL }}
         if: failure() && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
