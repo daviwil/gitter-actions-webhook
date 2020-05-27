@@ -36,7 +36,7 @@ jobs:
         run: exit 1
       - name: Report Failure to Gitter
         run: curl --data-urlencode "message=${{ github.job }} build of CI run [$GITHUB_RUN_ID](https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID) failed" -d level=error ${{ secrets.GITTER_URL }}
-        if: ${{ failure() }}
+        if: ${{ failure() && github.event_name == 'push' }}
 
   Job2:
     runs-on: ubuntu-latest
@@ -52,4 +52,4 @@ jobs:
     steps:
     - name: Report Success to Gitter
       run: curl --data-urlencode "message=CI run [$GITHUB_RUN_ID](https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID) passed" ${{ secrets.GITTER_URL }}
-      if: ${{ success() }}
+      if: ${{ success() && github.event_name == 'push' }}
